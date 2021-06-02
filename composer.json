@@ -1,14 +1,10 @@
 {
-    "name": "pixers/salesmanago-api",
-    "description": "SalesManago API",
+    "name": "darkorsa/salesmanago-api",
+    "description": "SalesManago API for PHP7 & 8",
     "authors": [
         {
-            "name": "Sylwester Łuczak",
-            "email": "sylwester.luczak@pixers.pl"
-        },
-        {
-            "name": "Michał Kanak",
-            "email": "michal.kanak@pixers.pl"
+            "name": "Dariusz Korsak",
+            "email": "d.korsak@codeninjas.pl"
         }
     ],
     "license": "BSD-3-Clause",
