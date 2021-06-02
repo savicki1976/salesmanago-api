@@ -17,7 +17,7 @@ class EmailServiceTest extends AbstractServiceTest
     /**
      * Setup email service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$emailService = new EmailService(self::$salesManagoClient);
@@ -42,14 +42,14 @@ class EmailServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('conversationId', $response);
-        $this->assertInternalType('string', $response->conversationId);
+        $this->assertIsString($response->conversationId);
         $this->assertNotEmpty($response->conversationId);
     }
 }

@@ -17,7 +17,7 @@ class SystemServiceTest extends AbstractServiceTest
     /**
      * Setup system service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$systemService = new SystemService(self::$salesManagoClient);
@@ -28,7 +28,7 @@ class SystemServiceTest extends AbstractServiceTest
         if (self::$config['isPartner'] === false) {
             return;
         }
-        
+
         $data = [
             'email' => self::$config['contactEmail'],
             'password' => 'secret_password'
@@ -39,18 +39,18 @@ class SystemServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('clientId', $response);
-        $this->assertInternalType('string', $response->clientId);
+        $this->assertIsString($response->clientId);
         $this->assertNotEmpty($response->clientId);
 
         $this->assertObjectHasAttribute('apiSecret', $response);
-        $this->assertInternalType('string', $response->apiSecret);
+        $this->assertIsString($response->apiSecret);
         $this->assertNotEmpty($response->apiSecret);
     }
 
@@ -70,22 +70,22 @@ class SystemServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('clientId', $response);
-        $this->assertInternalType('string', $response->clientId);
+        $this->assertIsString($response->clientId);
         $this->assertNotEmpty($response->clientId);
 
         $this->assertObjectHasAttribute('token', $response);
-        $this->assertInternalType('string', $response->token);
+        $this->assertIsString($response->token);
         $this->assertNotEmpty($response->token);
 
         $this->assertObjectHasAttribute('validTo', $response);
-        $this->assertInternalType('float', $response->validTo);
+        $this->assertIsFloat($response->validTo);
         $this->assertNotEmpty($response->validTo);
     }
 }

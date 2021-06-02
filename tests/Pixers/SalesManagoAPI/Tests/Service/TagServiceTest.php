@@ -17,7 +17,7 @@ class TagServiceTest extends AbstractServiceTest
     /**
      * Setup tag service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$tagService = new TagService(self::$salesManagoClient);
@@ -36,14 +36,14 @@ class TagServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('tags', $response);
-        $this->assertInternalType('array', $response->tags);
+        $this->assertIsArray($response->tags);
     }
 
     public function testModify()
@@ -58,14 +58,14 @@ class TagServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString($response->contactId);
         $this->assertNotEmpty($response->contactId);
 
         $contactId = $response->contactId;
@@ -80,14 +80,14 @@ class TagServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contacts', $response);
-        $this->assertInternalType('array', $response->contacts);
+        $this->assertIsArray($response->contacts);
         $this->assertNotEmpty($response->contacts);
         $this->assertCount(1, $response->contacts);
 
@@ -96,7 +96,7 @@ class TagServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $contactData);
         $this->assertEquals($contactId, $contactData->id);
         $this->assertObjectHasAttribute('contactTags', $contactData);
-        $this->assertInternalType('array', $contactData->contactTags);
+        $this->assertIsArray($contactData->contactTags);
         $this->assertNotEmpty($contactData->contactTags);
 
         $tagNames = [];
@@ -105,19 +105,19 @@ class TagServiceTest extends AbstractServiceTest
             $this->assertInstanceOf(\stdClass::class, $contactTag);
 
             $this->assertObjectHasAttribute('tag', $contactTag);
-            $this->assertInternalType('string', $contactTag->tag);
+            $this->assertIsString($contactTag->tag);
 
             $this->assertObjectHasAttribute('tagName', $contactTag);
-            $this->assertInternalType('string', $contactTag->tagName);
+            $this->assertIsString($contactTag->tagName);
 
             $this->assertObjectHasAttribute('score', $contactTag);
-            $this->assertInternalType('int', $contactTag->score);
+            $this->assertIsInt($contactTag->score);
 
             $this->assertObjectHasAttribute('createdOn', $contactTag);
-            $this->assertInternalType('float', $contactTag->createdOn);
+            $this->assertIsFloat($contactTag->createdOn);
 
             $this->assertObjectHasAttribute('tagWithScore', $contactTag);
-            $this->assertInternalType('string', $contactTag->tagWithScore);
+            $this->assertIsString($contactTag->tagWithScore);
 
             $tagNames[$contactTag->tag] = $contactTag->tag;
         }
@@ -134,7 +134,7 @@ class TagServiceTest extends AbstractServiceTest
     /**
      * Removing contact.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::removeContact();
     }

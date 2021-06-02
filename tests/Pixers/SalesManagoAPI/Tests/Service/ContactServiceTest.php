@@ -19,14 +19,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString($response->contactId);
         $this->assertNotEmpty($response->contactId);
 
         return $response->contactId;
@@ -45,18 +45,18 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('result', $response);
-        $this->assertInternalType('boolean', $response->result);
+        $this->assertIsBool($response->result);
         $this->assertTrue($response->result);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString($response->contactId);
         $this->assertNotEmpty($response->contactId);
         $this->assertEquals($contactId, $response->contactId);
 
@@ -81,14 +81,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contacts', $response);
-        $this->assertInternalType('array', $response->contacts);
+        $this->assertIsArray($response->contacts);
         $this->assertNotEmpty($response->contacts);
         $this->assertCount(1, $response->contacts);
 
@@ -120,14 +120,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contacts', $response);
-        $this->assertInternalType('array', $response->contacts);
+        $this->assertIsArray($response->contacts);
         $this->assertNotEmpty($response->contacts);
         $this->assertCount(1, $response->contacts);
 
@@ -154,11 +154,11 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('recentActivity', $response);
         $this->assertInstanceOf(\stdClass::class, $response->recentActivity);
@@ -176,14 +176,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('modifiedContacts', $response);
-        $this->assertInternalType('array', $response->modifiedContacts);
+        $this->assertIsArray($response->modifiedContacts);
 
         if (!empty($response->modifiedContacts)) {
             $firstContact = $response->modifiedContacts[0];
@@ -191,10 +191,10 @@ class ContactServiceTest extends AbstractServiceTest
             $this->assertInstanceOf(\stdClass::class, $firstContact);
 
             $this->assertObjectHasAttribute('id', $firstContact);
-            $this->assertInternalType('string', $firstContact->id);
+            $this->assertIsString($firstContact->id);
 
             $this->assertObjectHasAttribute('email', $firstContact);
-            $this->assertInternalType('string', $firstContact->email);
+            $this->assertIsString($firstContact->email);
         }
     }
 
@@ -216,14 +216,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString($response->contactId);
         $this->assertNotEmpty($response->contactId);
         $this->assertEquals($contactId, $response->contactId);
 
@@ -238,14 +238,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contacts', $response);
-        $this->assertInternalType('array', $response->contacts);
+        $this->assertIsArray($response->contacts);
         $this->assertNotEmpty($response->contacts);
         $this->assertCount(1, $response->contacts);
 
@@ -276,14 +276,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString($response->contactId);
         $this->assertNotEmpty($response->contactId);
         $this->assertEquals($contactId, $response->contactId);
 
@@ -298,14 +298,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contacts', $response);
-        $this->assertInternalType('array', $response->contacts);
+        $this->assertIsArray($response->contacts);
         $this->assertNotEmpty($response->contacts);
         $this->assertCount(1, $response->contacts);
 
@@ -326,11 +326,11 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('result', $response);
         $this->assertNULL($response->result);
@@ -340,14 +340,14 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('result', $response);
-        $this->assertInternalType('boolean', $response->result);
+        $this->assertIsBool($response->result);
         $this->assertFalse($response->result);
 
         $this->assertObjectHasAttribute('contactId', $response);

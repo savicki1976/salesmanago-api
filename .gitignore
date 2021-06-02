@@ -3,7 +3,7 @@ composer.phar
 phpunit.phar
 vendor/
 phpunit.xml
-
+.phpunit.result.cache
 # Directories used by IDEs
 nbproject
 .idea

@@ -17,7 +17,7 @@ class RuleServiceTest extends AbstractServiceTest
     /**
      * Setup rule service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$ruleService = new RuleService(self::$salesManagoClient);
@@ -47,14 +47,14 @@ class RuleServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('ruleId', $response);
-        $this->assertInternalType('string', $response->ruleId);
+        $this->assertIsString($response->ruleId);
         $this->assertNotEmpty($response->ruleId);
     }
 }

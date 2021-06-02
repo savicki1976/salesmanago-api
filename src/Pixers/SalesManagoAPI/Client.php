@@ -2,6 +2,7 @@
 
 namespace Pixers\SalesManagoAPI;
 
+use GuzzleHttp\Utils;
 use GuzzleHttp\Client as GuzzleClient;
 use Pixers\SalesManagoAPI\Exception\InvalidRequestException;
 use Pixers\SalesManagoAPI\Exception\InvalidArgumentException;
@@ -107,8 +108,11 @@ class Client
         $url = $this->config['endpoint'] . $apiMethod;
         $data = $this->mergeData($this->createAuthData(), $data);
 
-        $response = $this->getGuzzleClient()->request($method, $url, ['json' => $data]);
-        $responseContent = \GuzzleHttp\json_decode($response->getBody());
+        $response = $this->getGuzzleClient()->request($method, $url, [
+            'json' => $data,
+            'http_errors' => false,
+        ]);
+        $responseContent = Utils::jsonDecode((string) $response->getBody());
 
         if (!property_exists($responseContent, 'success') || !$responseContent->success) {
             throw new InvalidRequestException($method, $url, $data, $response);
@@ -141,7 +145,7 @@ class Client
      */
     private function mergeData(array $base, array $replacements)
     {
-        return array_filter(array_merge($base, $replacements), function($value) {
+        return array_filter(array_merge($base, $replacements), function ($value) {
             return $value !== null;
         });
     }

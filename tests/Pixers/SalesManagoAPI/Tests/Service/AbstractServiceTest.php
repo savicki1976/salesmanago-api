@@ -31,7 +31,7 @@ abstract class AbstractServiceTest extends TestCase
      */
     protected static $contactService;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$config = self::getConfig();
 

@@ -22,7 +22,7 @@ class EventServiceTest extends AbstractServiceTest
     /**
      * Setup event service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$eventService = new EventService(self::$salesManagoClient);
@@ -48,14 +48,14 @@ class EventServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('eventId', $response);
-        $this->assertInternalType('string', $response->eventId);
+        $this->assertIsString($response->eventId);
         $this->assertNotEmpty($response->eventId);
 
         return $response->eventId;
@@ -82,14 +82,14 @@ class EventServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('eventId', $response);
-        $this->assertInternalType('string', $response->eventId);
+        $this->assertIsString($response->eventId);
         $this->assertEquals($eventId, $response->eventId);
         $this->assertNotEmpty($response->eventId);
 
@@ -109,21 +109,21 @@ class EventServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('result', $response);
-        $this->assertInternalType('string', $response->result);
+        $this->assertIsString($response->result);
         $this->assertEquals('deleted', $response->result);
     }
 
     /**
      * Removing contact.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::removeContact();
     }

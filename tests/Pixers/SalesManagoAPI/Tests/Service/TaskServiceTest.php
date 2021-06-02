@@ -22,7 +22,7 @@ class TaskServiceTest extends AbstractServiceTest
     /**
      * Setup task service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$taskService = new TaskService(self::$salesManagoClient);
@@ -49,19 +49,19 @@ class TaskServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('taskId', $response);
-        $this->assertInternalType('string', $response->taskId);
+        $this->assertIsString($response->taskId);
         $this->assertNotEmpty($response->taskId);
 
         return $response->taskId;
     }
-    
+
     /**
      * @depends testCreate
      *
@@ -83,14 +83,14 @@ class TaskServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('taskId', $response);
-        $this->assertInternalType('string', $response->taskId);
+        $this->assertIsString($response->taskId);
         $this->assertNotEmpty($response->taskId);
         $this->assertEquals($taskId, $response->taskId);
 
@@ -105,14 +105,14 @@ class TaskServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contacts', $response);
-        $this->assertInternalType('array', $response->contacts);
+        $this->assertIsArray($response->contacts);
         $this->assertNotEmpty($response->contacts);
         $this->assertCount(1, $response->contacts);
 
@@ -120,7 +120,7 @@ class TaskServiceTest extends AbstractServiceTest
 
         $this->assertInstanceOf(\stdClass::class, $contactData);
         $this->assertObjectHasAttribute('contactTasks', $contactData);
-        $this->assertInternalType('array', $contactData->contactTasks);
+        $this->assertIsArray($contactData->contactTasks);
         $this->assertNotEmpty($contactData->contactTasks);
 
         $contactTask = $contactData->contactTasks[0];
@@ -128,21 +128,21 @@ class TaskServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $contactTask);
 
         $this->assertObjectHasAttribute('id', $contactTask);
-        $this->assertInternalType('string', $contactTask->id);
+        $this->assertIsString($contactTask->id);
         $this->assertEquals($taskId, $contactTask->id);
 
         $this->assertObjectHasAttribute('note', $contactTask);
-        $this->assertInternalType('string', $contactTask->note);
+        $this->assertIsString($contactTask->note);
         $this->assertEquals(self::TEST_NOTE_NEW, $contactTask->note);
 
         $this->assertObjectHasAttribute('date', $contactTask);
-        $this->assertInternalType('float', $contactTask->date);
+        $this->assertIsFloat($contactTask->date);
 
         $this->assertObjectHasAttribute('cc', $contactTask);
-        $this->assertInternalType('string', $contactTask->cc);
+        $this->assertIsString($contactTask->cc);
 
         $this->assertObjectHasAttribute('reminder', $contactTask);
-        $this->assertInternalType('float', $contactTask->reminder);
+        $this->assertIsFloat($contactTask->reminder);
         $this->assertEquals(self::TEST_REMINDER_NEW, $contactTask->reminder);
 
         return $response->taskId;
@@ -160,14 +160,14 @@ class TaskServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('taskId', $response);
-        $this->assertInternalType('string', $response->taskId);
+        $this->assertIsString($response->taskId);
         $this->assertNotEmpty($response->taskId);
         $this->assertEquals($taskId, $response->taskId);
     }
@@ -175,7 +175,7 @@ class TaskServiceTest extends AbstractServiceTest
     /**
      * Removing contact.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::removeContact();
     }

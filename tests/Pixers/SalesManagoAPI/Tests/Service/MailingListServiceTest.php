@@ -17,7 +17,7 @@ class MailingListServiceTest extends AbstractServiceTest
     /**
      * Setup mailing list service.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$mailingListService = new MailingListService(self::$salesManagoClient);
@@ -35,14 +35,14 @@ class MailingListServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString('string', $response->contactId);
         $this->assertNotEmpty($response->contactId);
 
         return $response->contactId;
@@ -60,14 +60,14 @@ class MailingListServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response);
 
         $this->assertObjectHasAttribute('success', $response);
-        $this->assertInternalType('boolean', $response->success);
+        $this->assertIsBool($response->success);
         $this->assertTrue($response->success);
 
         $this->assertObjectHasAttribute('message', $response);
-        $this->assertInternalType('array', $response->message);
+        $this->assertIsArray($response->message);
 
         $this->assertObjectHasAttribute('contactId', $response);
-        $this->assertInternalType('string', $response->contactId);
+        $this->assertIsString('string', $response->contactId);
         $this->assertEquals($contactId, $response->contactId);
         $this->assertNotEmpty($response->contactId);
     }
@@ -75,7 +75,7 @@ class MailingListServiceTest extends AbstractServiceTest
     /**
      * Removing contact.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::removeContact();
     }
