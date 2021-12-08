@@ -10,11 +10,9 @@ class CouponService extends AbstractService
     /**
      * Adding a new coupon to contact.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  string $email Contact e-mail address
-     * @param  array  $data  Client data
+     * @param  array<string, mixed>  $data  Client data
      */
-    public function create($owner, $email, array $data): object
+    public function create(string $owner, string $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,

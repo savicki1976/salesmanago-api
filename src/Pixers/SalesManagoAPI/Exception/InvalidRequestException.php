@@ -3,87 +3,53 @@
 namespace Pixers\SalesManagoAPI\Exception;
 
 use GuzzleHttp\Psr7\Response as Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Sylwester Łuczak <sylwester.luczak@pixers.pl>
  */
 class InvalidRequestException extends SalesManagoAPIException
 {
+    protected string $requestMethod;
+    protected string $requestUrl;
     /**
-     * @var string
+     * @var array<mixed>
      */
-    protected $requestMethod;
+    protected array $requestData;
+    protected ResponseInterface $response;
 
     /**
-     * @var string
+     * @param array<mixed> $requestData
      */
-    protected $requestUrl;
-
-    /**
-     * @var array
-     */
-    protected $requestData;
-
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
-     * Extended Exception constructor.
-     *
-     * @param string   $requestMethod Request method
-     * @param string   $requestUrl    Request URL
-     * @param array    $requestData   Request data
-     * @param Response $response      Response
-     */
-    public function __construct($requestMethod, $requestUrl, array $requestData, Response $response)
+    public function __construct(string $requestMethod, string $requestUrl, array $requestData, ResponseInterface $response)
     {
         $this->requestMethod = $requestMethod;
         $this->requestUrl = $requestUrl;
         $this->requestData = $requestData;
         $this->response = $response;
-        $this->message = 'Error occured when sending request.';
 
-        parent::__construct($this->message, 0, null);
+        parent::__construct('Error occured when sending request.');
     }
 
-    /**
-     * Returning request method.
-     *
-     * @return string
-     */
-    public function getRequestMethod()
+    public function getRequestMethod(): string
     {
         return $this->requestMethod;
     }
 
-    /**
-     * Returning request url.
-     *
-     * @return string
-     */
-    public function getRequestUrl()
+    public function getRequestUrl(): string
     {
         return $this->requestUrl;
     }
 
     /**
-     * Returning request data.
-     *
-     * @return array
+     * @return mixed[]
      */
-    public function getRequestData()
+    public function getRequestData(): array
     {
         return $this->requestData;
     }
 
-    /**
-     * Returning response.
-     *
-     * @return Response
-     */
-    public function getResponse()
+    public function getResponse(): ResponseInterface
     {
         return $this->response;
     }

@@ -9,10 +9,7 @@ use Pixers\SalesManagoAPI\Service\ContactService;
  */
 class ContactServiceTest extends AbstractServiceTest
 {
-    /**
-     * @return string
-     */
-    public function testCreate()
+    public function testCreate(): string
     {
         $response = self::createContact();
 
@@ -36,9 +33,8 @@ class ContactServiceTest extends AbstractServiceTest
      * @depends testCreate
      *
      * @param  string $contactId
-     * @return string
      */
-    public function testHas($contactId)
+    public function testHas($contactId): string
     {
         $response = self::$contactService->has(self::$config['owner'], self::$config['contactEmail']);
 
@@ -68,7 +64,7 @@ class ContactServiceTest extends AbstractServiceTest
      *
      * @param  string $contactId
      */
-    public function testListByEmails($contactId)
+    public function testListByEmails($contactId): void
     {
         $data = [
             'email' => [
@@ -107,7 +103,7 @@ class ContactServiceTest extends AbstractServiceTest
      *
      * @param  string $contactId
      */
-    public function testListByEmailsIds($contactId)
+    public function testListByEmailsIds($contactId): void
     {
         $data = [
             'contactId' => [
@@ -141,7 +137,7 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertEquals(self::$config['owner'], $contactData->mainContactOwner);
     }
 
-    public function testListRecentActivity()
+    public function testListRecentActivity(): void
     {
         $data = [
             'from' => date('c', strtotime('-10 minutes', time())),
@@ -164,7 +160,7 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertInstanceOf(\stdClass::class, $response->recentActivity);
     }
 
-    public function testListRecentlyModified()
+    public function testListRecentlyModified(): void
     {
         $data = [
             'from' => date('c', strtotime('-30 minutes', time())),
@@ -203,7 +199,7 @@ class ContactServiceTest extends AbstractServiceTest
      *
      * @param string $contactId
      */
-    public function testUpdate($contactId)
+    public function testUpdate($contactId): void
     {
         $data = [
             'contact' => [
@@ -263,7 +259,7 @@ class ContactServiceTest extends AbstractServiceTest
      *
      * @param string $contactId
      */
-    public function testUpsert($contactId)
+    public function testUpsert($contactId): void
     {
         $data = [
             'contact' => [
@@ -319,7 +315,7 @@ class ContactServiceTest extends AbstractServiceTest
         $this->assertEquals(self::$config['owner'], $contactData->mainContactOwner);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $response = $this->removeContact();
 

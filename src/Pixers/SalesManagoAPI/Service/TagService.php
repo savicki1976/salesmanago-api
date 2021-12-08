@@ -10,10 +10,9 @@ class TagService extends AbstractService
     /**
      * Retriving all tags.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  array  $data  Request data
+     * @param  array<string, mixed>  $data  Request data
      */
-    public function getAll($owner, array $data): object
+    public function getAll(string $owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -23,11 +22,9 @@ class TagService extends AbstractService
     /**
      * Manage contact tags.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  string $email Contact e-mail address
-     * @param  array  $data  Tags data
+     * @param  array<string, mixed>  $data  Tags data
      */
-    public function modify($owner, $email, array $data): object
+    public function modify(string $owner, string $email, array $data): object
     {
         $data = self::mergeData($data, [
             'email' => $email,

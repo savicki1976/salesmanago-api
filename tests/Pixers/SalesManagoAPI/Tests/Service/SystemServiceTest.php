@@ -23,7 +23,7 @@ class SystemServiceTest extends AbstractServiceTest
         self::$systemService = new SystemService(self::$salesManagoClient);
     }
 
-    public function testRegisterAccount()
+    public function testRegisterAccount(): void
     {
         if (self::$config['isPartner'] === false) {
             return;
@@ -54,7 +54,7 @@ class SystemServiceTest extends AbstractServiceTest
         $this->assertNotEmpty($response->apiSecret);
     }
 
-    public function testAuthorise()
+    public function testAuthorise(): void
     {
         $data = [
             'userName' => self::$config['clientEmail'],

@@ -23,7 +23,7 @@ use Pixers\SalesManagoAPI\Service\TaskService;
  */
 class SalesManago
 {
-    protected $client;
+    protected Client $client;
 
     /**
      * @var AbstractService[]

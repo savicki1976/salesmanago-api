@@ -17,7 +17,7 @@ abstract class AbstractServiceTest extends TestCase
     const CONTACT_TEST_FAX_NEW = '999999999';
 
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected static $config;
 
@@ -49,7 +49,7 @@ abstract class AbstractServiceTest extends TestCase
     /**
      * Returns config.
      *  
-     * @return array
+     * @return array<mixed>
      */
     protected static function getConfig()
     {

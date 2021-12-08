@@ -8,7 +8,7 @@ class ClientTest extends TestCase
     /**
      * @test
      */
-    public function shouldPassedWhileCreatingClientWithData()
+    public function shouldPassedWhileCreatingClientWithData(): void
     {
         $clientId = 'test';
         $endPoint = 'test';

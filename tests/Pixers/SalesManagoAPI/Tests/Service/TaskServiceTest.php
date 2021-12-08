@@ -30,10 +30,7 @@ class TaskServiceTest extends AbstractServiceTest
         self::createContact();
     }
 
-    /**
-     * @return string
-     */
-    public function testCreate()
+    public function testCreate(): string
     {
         $data = [
             'smContactTaskReq' => [
@@ -64,10 +61,8 @@ class TaskServiceTest extends AbstractServiceTest
 
     /**
      * @depends testCreate
-     *
-     * @param string $taskId
      */
-    public function testUpdate($taskId)
+    public function testUpdate(string $taskId): string
     {
         $data = [
             'smContactTaskReq' => [
@@ -150,10 +145,8 @@ class TaskServiceTest extends AbstractServiceTest
 
     /**
      * @depends testUpdate
-     *
-     * @param  string $taskId
      */
-    public function testDelete($taskId)
+    public function testDelete(string $taskId): void
     {
         $response = self::$taskService->delete($taskId);
 

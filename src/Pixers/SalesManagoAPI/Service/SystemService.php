@@ -10,7 +10,7 @@ class SystemService extends AbstractService
     /**
      * Register system account (only for SalesManago partners).
      *
-     * @param array $data Account data
+     * @param array<string, mixed> $data Account data
      */
     public function registerAccount(array $data): object
     {
@@ -20,7 +20,7 @@ class SystemService extends AbstractService
     /**
      * Temporary authorise.
      *
-     * @param  array $data
+     * @param  array<string, mixed> $data
      */
     public function authorise(array $data): object
     {

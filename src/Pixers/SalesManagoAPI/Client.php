@@ -18,6 +18,7 @@ class Client
     const METHOD_POST = 'POST';
     const METHOD_GET = 'GET';
 
+    /** @var string[] */
     protected array $config;
 
     protected GuzzleClient $guzzleClient;
@@ -47,7 +48,7 @@ class Client
     /**
      * Send POST request to SalesManago API.
      *
-     * @param  array  $data   Request data
+     * @param  array<string, mixed>  $data   Request data
      */
     public function doPost(string $method, array $data): object
     {
@@ -57,7 +58,7 @@ class Client
     /**
      * Send GET request to SalesManago API.
      *
-     * @param  array  $data   Request data
+     * @param  array<string, mixed>  $data   Request data
      */
     public function doGet(string $method, array $data): object
     {
@@ -67,7 +68,7 @@ class Client
     /**
      * Send request to SalesManago API.
      *
-     * @param  array  $data      Request data
+     * @param  array<string, mixed>  $data      Request data
      */
     protected function doRequest(string $method, string $apiMethod, array $data = []): object
     {
@@ -89,6 +90,7 @@ class Client
 
     /**
      * Returns an array of authentication data.
+     * @return array<string, mixed>
      */
     protected function createAuthData(): array
     {
@@ -103,8 +105,9 @@ class Client
     /**
      * Merge data and removing null values.
      *
-     * @param  array $base         The array in which elements are replaced
-     * @param  array $replacements The array from which elements will be extracted
+     * @param  array<string, mixed> $base         The array in which elements are replaced
+     * @param  array<string, mixed> $replacements The array from which elements will be extracted
+     * @return array<string, mixed>
      */
     private function mergeData(array $base, array $replacements): array
     {

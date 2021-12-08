@@ -25,10 +25,7 @@ class MailingListServiceTest extends AbstractServiceTest
         self::createContact();
     }
 
-    /**
-     * @return string
-     */
-    public function testAdd()
+    public function testAdd(): string
     {
         $response = self::$mailingListService->add(self::$config['contactEmail']);
 
@@ -50,10 +47,8 @@ class MailingListServiceTest extends AbstractServiceTest
 
     /**
      * @depends testAdd
-     *
-     * @param string $contactId
      */
-    public function testRemove($contactId)
+    public function testRemove(string $contactId): void
     {
         $response = self::$mailingListService->remove(self::$config['contactEmail']);
 
@@ -72,9 +67,6 @@ class MailingListServiceTest extends AbstractServiceTest
         $this->assertNotEmpty($response->contactId);
     }
 
-    /**
-     * Removing contact.
-     */
     public static function tearDownAfterClass(): void
     {
         self::removeContact();

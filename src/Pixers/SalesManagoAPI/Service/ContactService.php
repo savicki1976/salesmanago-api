@@ -10,10 +10,9 @@ class ContactService extends AbstractService
     /**
      * Adding a new contact.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  array  $data  Contact data
+     * @param  array<string, mixed>  $data  Contact data
      */
-    public function create($owner, array $data)
+    public function create(string $owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -23,11 +22,9 @@ class ContactService extends AbstractService
     /**
      * Update contact data.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  string $email Contact e-mail address
-     * @param  array  $data  Contact data
+     * @param  array<string, mixed>  $data  Contact data
      */
-    public function update($owner, $email, array $data): object
+    public function update(string $owner, string $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -40,11 +37,9 @@ class ContactService extends AbstractService
     /**
      * Deleting contact.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  string $email Contact e-mail address
-     * @param  array  $data  Contact data
+     * @param  array<string, mixed>  $data  Contact data
      */
-    public function upsert($owner, $email, array $data): object
+    public function upsert(string $owner, string $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -58,11 +53,9 @@ class ContactService extends AbstractService
     /**
      * Deleting contact.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  string $email Contact e-mail address
-     * @param  array  $data  Client data
+     * @param  array<string, mixed>  $data  Client data
      */
-    public function delete($owner, $email, array $data)
+    public function delete(string $owner, string $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -74,11 +67,8 @@ class ContactService extends AbstractService
 
     /**
      * Checking whether the contact is already registered.
-     *
-     * @param  string $owner Contact owner email address
-     * @param  string $email Contact email address
      */
-    public function has($owner, $email): object
+    public function has(string $owner, string $email): object
     {
         return $this->client->doPost('contact/hasContact', [
             'email' => $email,
@@ -88,11 +78,8 @@ class ContactService extends AbstractService
 
     /**
      * Registering contact use discount code.
-     *
-     * @param  string $email  Contact email address
-     * @param  string $coupon Coupon
      */
-    public function useCoupon($email, $coupon): object
+    public function useCoupon(string $email, string $coupon): object
     {
         return $this->client->doPost('contact/useContactCoupon', [
             'email' => $email,
@@ -103,10 +90,9 @@ class ContactService extends AbstractService
     /**
      * Import contacts list by the e-mail addresses.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  array  $data  Request data
+     * @param  array<string, mixed>  $data  Request data
      */
-    public function listByEmails($owner, array $data): object
+    public function listByEmails(string $owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -116,10 +102,9 @@ class ContactService extends AbstractService
     /**
      * Import contacts list by the SalesManago IDS.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  array  $data  Request data
+     * @param  array<string, mixed>  $data  Request data
      */
-    public function listByIds($owner, array $data): object
+    public function listByIds(string $owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -129,10 +114,9 @@ class ContactService extends AbstractService
     /**
      * Import list of last modyfied contacts.
      *
-     * @param  string $owner Contact owner e-mail address
-     * @param  array  $data  Request data
+     * @param  array<string, mixed>  $data  Request data
      */
-    public function listRecentlyModified($owner, array $data): object
+    public function listRecentlyModified(string $owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -142,7 +126,7 @@ class ContactService extends AbstractService
     /**
      * Import data about recently active contacts.
      *
-     * @param  array $data Request data
+     * @param  array<string, mixed> $data Request data
      */
     public function listRecentActivity(array $data): object
     {

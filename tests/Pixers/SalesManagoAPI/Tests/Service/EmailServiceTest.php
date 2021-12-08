@@ -23,7 +23,7 @@ class EmailServiceTest extends AbstractServiceTest
         self::$emailService = new EmailService(self::$salesManagoClient);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $data = [
             'user' => self::$config['owner'],

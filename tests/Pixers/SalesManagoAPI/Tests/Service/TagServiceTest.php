@@ -25,7 +25,7 @@ class TagServiceTest extends AbstractServiceTest
         self::createContact();
     }
 
-    public function testGetAll()
+    public function testGetAll(): void
     {
         $data = [
             'showSystemTags' => true
@@ -46,7 +46,7 @@ class TagServiceTest extends AbstractServiceTest
         $this->assertIsArray($response->tags);
     }
 
-    public function testModify()
+    public function testModify(): void
     {
         $dataTags = [
             'tags' => ['TAG_4', 'TAG_5', 'TAG_6'],

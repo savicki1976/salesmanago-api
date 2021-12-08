@@ -23,7 +23,7 @@ class CouponServiceTest extends AbstractServiceTest
         self::$couponService = new CouponService(self::$salesManagoClient);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $data = [
             'name' => 'testCouponName',

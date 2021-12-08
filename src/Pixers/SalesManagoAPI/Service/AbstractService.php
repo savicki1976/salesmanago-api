@@ -19,8 +19,9 @@ abstract class AbstractService
     /**
      * Replaces elements from passed arrays into the first array recursively.
      *
-     * @param  array $base         The array in which elements are replaced
-     * @param  array $replacements The array from which elements will be extracted
+     * @param  array<string, mixed> $base         The array in which elements are replaced
+     * @param  array<string, mixed> $replacements The array from which elements will be extracted
+     * @return array<string, mixed>
      */
     protected static function mergeData(array $base, array $replacements): array
     {

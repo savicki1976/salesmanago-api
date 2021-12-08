@@ -8,7 +8,7 @@ namespace Pixers\SalesManagoAPI\Exception;
 class InvalidArgumentException extends SalesManagoAPIException
 {
     /**
-     * @var array
+     * @var mixed
      */
     protected $argumentValue;
 

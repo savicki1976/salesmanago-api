@@ -23,7 +23,7 @@ class RuleServiceTest extends AbstractServiceTest
         self::$ruleService = new RuleService(self::$salesManagoClient);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $data = [
             'shared' => true,
