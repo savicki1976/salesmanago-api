@@ -100,9 +100,8 @@ class EventServiceTest extends AbstractServiceTest
      * @depends testUpdate
      *
      * @param  string $eventId
-     * @return string
      */
-    public function testDelete($eventId)
+    public function testDelete($eventId): void
     {
         $response = self::$eventService->delete(self::$config['owner'], $eventId);
 

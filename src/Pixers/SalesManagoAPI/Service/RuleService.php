@@ -11,10 +11,9 @@ class RuleService extends AbstractService
      * Add automation rule.
      *
      * @param  string $owner Contact owner e-mail address
-     * @param  string $data  Rule data
-     * @return array
+     * @param  array $data  Rule data
      */
-    public function create($owner, array $data)
+    public function create($owner, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,

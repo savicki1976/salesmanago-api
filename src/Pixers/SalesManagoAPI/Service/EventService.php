@@ -13,9 +13,8 @@ class EventService extends AbstractService
      * @param  string $owner Contact owner e-mail address
      * @param  string $email Contact e-mail address
      * @param  array  $data  Contact event data
-     * @return array
      */
-    public function create($owner, $email, array $data)
+    public function create($owner, $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -31,9 +30,8 @@ class EventService extends AbstractService
      * @param  string $owner   Contact owner e-mail address
      * @param  string $eventId Ext event identifier
      * @param  array  $data    New event data
-     * @return array
      */
-    public function update($owner, $eventId, array $data)
+    public function update($owner, $eventId, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -50,9 +48,8 @@ class EventService extends AbstractService
      *
      * @param  string $owner   Contact owner e-mail address
      * @param  string $eventId Ext event identifier
-     * @return array
      */
-    public function delete($owner, $eventId)
+    public function delete($owner, $eventId): object
     {
         return $this->client->doPost('contact/deleteContactExtEvent', [
             'owner' => $owner,

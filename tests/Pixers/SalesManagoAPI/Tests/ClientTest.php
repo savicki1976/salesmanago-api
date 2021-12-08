@@ -5,15 +5,6 @@ use Pixers\SalesManagoAPI\Client;
 
 class ClientTest extends TestCase
 {
-     /**
-     * @test
-     * @expectedException PHPUnit_Framework_Error
-     */
-    public function shouldFailedWhileCreatingClientWithoutAnyData()
-    {
-        $client = new Client();
-    }
-
     /**
      * @test
      */
@@ -23,7 +14,9 @@ class ClientTest extends TestCase
         $endPoint = 'test';
         $apiSecret = 'test'; 
         $apiKey = 'test';
-    
-        $client = new Client($clientId, $endPoint, $apiSecret, $apiKey);
+
+        $this->expectNotToPerformAssertions();
+
+        new Client(new GuzzleHttp\Client(), $clientId, $endPoint, $apiSecret, $apiKey);
     }
 }

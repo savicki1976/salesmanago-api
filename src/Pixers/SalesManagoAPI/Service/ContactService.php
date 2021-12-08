@@ -12,7 +12,6 @@ class ContactService extends AbstractService
      *
      * @param  string $owner Contact owner e-mail address
      * @param  array  $data  Contact data
-     * @return array
      */
     public function create($owner, array $data)
     {
@@ -27,9 +26,8 @@ class ContactService extends AbstractService
      * @param  string $owner Contact owner e-mail address
      * @param  string $email Contact e-mail address
      * @param  array  $data  Contact data
-     * @return array
      */
-    public function update($owner, $email, array $data)
+    public function update($owner, $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -45,9 +43,8 @@ class ContactService extends AbstractService
      * @param  string $owner Contact owner e-mail address
      * @param  string $email Contact e-mail address
      * @param  array  $data  Contact data
-     * @return array
      */
-    public function upsert($owner, $email, array $data)
+    public function upsert($owner, $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
@@ -64,7 +61,6 @@ class ContactService extends AbstractService
      * @param  string $owner Contact owner e-mail address
      * @param  string $email Contact e-mail address
      * @param  array  $data  Client data
-     * @return array
      */
     public function delete($owner, $email, array $data)
     {
@@ -81,9 +77,8 @@ class ContactService extends AbstractService
      *
      * @param  string $owner Contact owner email address
      * @param  string $email Contact email address
-     * @return array
      */
-    public function has($owner, $email)
+    public function has($owner, $email): object
     {
         return $this->client->doPost('contact/hasContact', [
             'email' => $email,
@@ -96,9 +91,8 @@ class ContactService extends AbstractService
      *
      * @param  string $email  Contact email address
      * @param  string $coupon Coupon
-     * @return array
      */
-    public function useCoupon($email, $coupon)
+    public function useCoupon($email, $coupon): object
     {
         return $this->client->doPost('contact/useContactCoupon', [
             'email' => $email,
@@ -111,9 +105,8 @@ class ContactService extends AbstractService
      *
      * @param  string $owner Contact owner e-mail address
      * @param  array  $data  Request data
-     * @return array
      */
-    public function listByEmails($owner, array $data)
+    public function listByEmails($owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -125,9 +118,8 @@ class ContactService extends AbstractService
      *
      * @param  string $owner Contact owner e-mail address
      * @param  array  $data  Request data
-     * @return array
      */
-    public function listByIds($owner, array $data)
+    public function listByIds($owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -139,9 +131,8 @@ class ContactService extends AbstractService
      *
      * @param  string $owner Contact owner e-mail address
      * @param  array  $data  Request data
-     * @return array
      */
-    public function listRecentlyModified($owner, array $data)
+    public function listRecentlyModified($owner, array $data): object
     {
         $data['owner'] = $owner;
 
@@ -152,9 +143,8 @@ class ContactService extends AbstractService
      * Import data about recently active contacts.
      *
      * @param  array $data Request data
-     * @return array
      */
-    public function listRecentActivity(array $data)
+    public function listRecentActivity(array $data): object
     {
         return $this->client->doPost('contact/recentActivity', $data);
     }

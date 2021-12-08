@@ -4,6 +4,17 @@ namespace Pixers\SalesManagoAPI;
 
 use Pixers\SalesManagoAPI\Client;
 use Pixers\SalesManagoAPI\Service;
+use Pixers\SalesManagoAPI\Service\AbstractService;
+use Pixers\SalesManagoAPI\Service\ContactService;
+use Pixers\SalesManagoAPI\Service\CouponService;
+use Pixers\SalesManagoAPI\Service\EmailService;
+use Pixers\SalesManagoAPI\Service\EventService;
+use Pixers\SalesManagoAPI\Service\MailingListService;
+use Pixers\SalesManagoAPI\Service\PhoneListService;
+use Pixers\SalesManagoAPI\Service\RuleService;
+use Pixers\SalesManagoAPI\Service\SystemService;
+use Pixers\SalesManagoAPI\Service\TagService;
+use Pixers\SalesManagoAPI\Service\TaskService;
 
 /**
  * SalesManago Services Locator.
@@ -12,113 +23,82 @@ use Pixers\SalesManagoAPI\Service;
  */
 class SalesManago
 {
-    /**
-     * @var Client
-     */
     protected $client;
 
     /**
-     * @var array
+     * @var AbstractService[]
      */
-    protected $services;
+    protected array $services;
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
         $this->services = [];
     }
 
-    /**
-     * @return ContactService
-     */
-    public function getContactService()
+    public function getContactService(): ContactService
     {
-        return $this->getService(Service\ContactService::class);
+        return $this->getService(ContactService::class);
     }
 
-    /**
-     * @return CouponService
-     */
-    public function getCouponService()
+    public function getCouponService(): CouponService
     {
-        return $this->getService(Service\CouponService::class);
+        return $this->getService(CouponService::class);
     }
 
-    /**
-     * @return EmailService
-     */
-    public function getEmailService()
+    public function getEmailService(): EmailService
     {
         return $this->getService(Service\EmailService::class);
     }
 
-    /**
-     * @return EventService
-     */
-    public function getEventService()
+    public function getEventService(): EventService
     {
-        return $this->getService(Service\EventService::class);
+        return $this->getService(EventService::class);
+    }
+
+    public function getMailingListService(): MailingListService
+    {
+        return $this->getService(MailingListService::class);
+    }
+
+    public function getPhoneListService(): PhoneListService
+    {
+        return $this->getService(PhoneListService::class);
+    }
+
+    public function getRuleService(): RuleService
+    {
+        return $this->getService(RuleService::class);
+    }
+
+    public function getSystemService(): SystemService
+    {
+        return $this->getService(SystemService::class);
+    }
+
+    public function getTagService(): TagService
+    {
+        return $this->getService(TagService::class);
+    }
+
+    public function getTaskService(): TaskService
+    {
+        return $this->getService(TaskService::class);
     }
 
     /**
-     * @return MailingListService
+     * @template T of AbstractService
+     * @param  class-string<T> $className
+     * @return T
      */
-    public function getMailingListService()
-    {
-        return $this->getService(Service\MailingListService::class);
-    }
-
-    /**
-     * @return PhoneListService
-     */
-    public function getPhoneListService()
-    {
-        return $this->getService(Service\PhoneListService::class);
-    }
-
-    /**
-     * @return RuleService
-     */
-    public function getRuleService()
-    {
-        return $this->getService(Service\RuleService::class);
-    }
-
-    /**
-     * @return SystemService
-     */
-    public function getSystemService()
-    {
-        return $this->getService(Service\SystemService::class);
-    }
-
-    /**
-     * @return TagService
-     */
-    public function getTagService()
-    {
-        return $this->getService(Service\TagService::class);
-    }
-
-    /**
-     * @return TaskService
-     */
-    public function getTaskService()
-    {
-        return $this->getService(Service\TaskService::class);
-    }
-
-    /**
-     * @param  string $className
-     * @return mixed
-     */
-    protected function getService($className)
+    protected function getService(string $className): AbstractService
     {
         if (!isset($this->services[$className])) {
             $this->services[$className] = new $className($this->client);
+        }
+
+        if (! $this->services[$className] instanceof $className) {
+            throw new \UnexpectedValueException(get_debug_type($this->services[$className]));
         }
 
         return $this->services[$className];

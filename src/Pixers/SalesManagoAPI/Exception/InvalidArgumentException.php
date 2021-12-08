@@ -34,6 +34,6 @@ class InvalidArgumentException extends SalesManagoAPIException
      */
     public function getArgumentValue()
     {
-        return $this->parameterValue;
+        return $this->argumentValue;
     }
 }

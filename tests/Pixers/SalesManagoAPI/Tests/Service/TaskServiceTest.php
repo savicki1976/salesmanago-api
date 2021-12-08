@@ -15,7 +15,7 @@ class TaskServiceTest extends AbstractServiceTest
     const TEST_REMINDER_NEW = '_30_MIN';
 
     /**
-     * @var PhoneListService
+     * @var TaskService
      */
     protected static $taskService;
 

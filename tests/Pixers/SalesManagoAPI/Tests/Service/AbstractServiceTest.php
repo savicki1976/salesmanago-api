@@ -36,10 +36,11 @@ abstract class AbstractServiceTest extends TestCase
         self::$config = self::getConfig();
 
         self::$salesManagoClient = new Client(
+            new \GuzzleHttp\Client(),
             self::$config['clientId'],
             self::$config['endPoint'],
             self::$config['apiSecret'],
-            self::$config['apiKey']
+            self::$config['apiKey'],
         );
 
         self::$contactService = new ContactService(self::$salesManagoClient);

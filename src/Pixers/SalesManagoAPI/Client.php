@@ -18,21 +18,18 @@ class Client
     const METHOD_POST = 'POST';
     const METHOD_GET = 'GET';
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
 
-    /**
-     * @var GuzzleClient
-     */
-    protected $guzzleClient;
+    protected GuzzleClient $guzzleClient;
 
-    /**
-     * Initialization.
-     */
-    public function __construct($clientId, $endPoint, $apiSecret, $apiKey)
-    {
+    public function __construct(
+        GuzzleClient $guzzleClient,
+        string $clientId,
+        string $endPoint,
+        string $apiSecret,
+        string $apiKey
+    ) {
+        $this->guzzleClient = $guzzleClient;
         $this->config = [
             'client_id' => $clientId,
             'endpoint' => rtrim($endPoint, '/') . '/',
@@ -48,37 +45,11 @@ class Client
     }
 
     /**
-     * Sets GuzzleClient.
-     *
-     * @param GuzzleClient $guzzleClient
-     */
-    public function setGuzzleClient(GuzzleClient $guzzleClient)
-    {
-        $this->guzzleClient = $guzzleClient;
-    }
-
-    /**
-     * Gets GuzzleClient.
-     *
-     * @return GuzzleClient
-     */
-    public function getGuzzleClient()
-    {
-        if (!$this->guzzleClient) {
-            $this->guzzleClient = new GuzzleClient();
-        }
-
-        return $this->guzzleClient;
-    }
-
-    /**
      * Send POST request to SalesManago API.
      *
-     * @param  string $method API Method
      * @param  array  $data   Request data
-     * @return array
      */
-    public function doPost($method, array $data)
+    public function doPost(string $method, array $data): object
     {
         return $this->doRequest(self::METHOD_POST, $method, $data);
     }
@@ -86,11 +57,9 @@ class Client
     /**
      * Send GET request to SalesManago API.
      *
-     * @param  string $method API Method
      * @param  array  $data   Request data
-     * @return array
      */
-    public function doGet($method, array $data)
+    public function doGet(string $method, array $data): object
     {
         return $this->doRequest(self::METHOD_GET, $method, $data);
     }
@@ -98,23 +67,20 @@ class Client
     /**
      * Send request to SalesManago API.
      *
-     * @param  string $method    HTTP Method
-     * @param  string $apiMethod API Method
      * @param  array  $data      Request data
-     * @return array
      */
-    protected function doRequest($method, $apiMethod, array $data = [])
+    protected function doRequest(string $method, string $apiMethod, array $data = []): object
     {
         $url = $this->config['endpoint'] . $apiMethod;
         $data = $this->mergeData($this->createAuthData(), $data);
 
-        $response = $this->getGuzzleClient()->request($method, $url, [
+        $response = $this->guzzleClient->request($method, $url, [
             'json' => $data,
             'http_errors' => false,
         ]);
         $responseContent = Utils::jsonDecode((string) $response->getBody());
 
-        if (!property_exists($responseContent, 'success') || !$responseContent->success) {
+        if (!is_object($responseContent) || !property_exists($responseContent, 'success') || !$responseContent->success) {
             throw new InvalidRequestException($method, $url, $data, $response);
         }
 
@@ -123,10 +89,8 @@ class Client
 
     /**
      * Returns an array of authentication data.
-     *
-     * @return array
      */
-    protected function createAuthData()
+    protected function createAuthData(): array
     {
         return [
             'clientId' => $this->config['client_id'],
@@ -141,12 +105,9 @@ class Client
      *
      * @param  array $base         The array in which elements are replaced
      * @param  array $replacements The array from which elements will be extracted
-     * @return array
      */
-    private function mergeData(array $base, array $replacements)
+    private function mergeData(array $base, array $replacements): array
     {
-        return array_filter(array_merge($base, $replacements), function ($value) {
-            return $value !== null;
-        });
+        return array_filter(array_merge($base, $replacements), fn ($value) => $value !== null);
     }
 }

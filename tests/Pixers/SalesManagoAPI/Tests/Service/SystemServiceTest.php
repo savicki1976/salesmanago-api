@@ -10,7 +10,7 @@ use Pixers\SalesManagoAPI\Service\SystemService;
 class SystemServiceTest extends AbstractServiceTest
 {
     /**
-     * @var RuleService
+     * @var SystemService
      */
     protected static $systemService;
 

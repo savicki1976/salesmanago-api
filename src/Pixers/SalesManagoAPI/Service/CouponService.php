@@ -14,7 +14,7 @@ class CouponService extends AbstractService
      * @param  string $email Contact e-mail address
      * @param  array  $data  Client data
      */
-    public function create($owner, $email, array $data)
+    public function create($owner, $email, array $data): object
     {
         $data = self::mergeData($data, [
             'owner' => $owner,
