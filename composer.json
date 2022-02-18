@@ -1,20 +1,24 @@
 {
     "name": "snapshotpl/salesmanago-api",
-    "description": "SalesManago API for PHP7 & 8",
+    "description": "SalesManago API for PHP",
     "authors": [
         {
             "name": "Dariusz Korsak",
             "email": "d.korsak@codeninjas.pl"
+        },
+        {
+            "name": "Witold Wasiczk",
+            "email": "witold@wasiczko.pl"
         }
     ],
     "license": "BSD-3-Clause",
     "require": {
-        "php": ">=7.4",
-        "guzzlehttp/guzzle": "^7.0.1"
+        "php": "^8.0 || ^8.1",
+        "guzzlehttp/guzzle": "^7.4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0",
-        "phpstan/phpstan": "^1.2"
+        "phpunit/phpunit": "^9.5.13",
+        "phpstan/phpstan": "^1.4.6"
     },
     "autoload": {
         "psr-0": {
