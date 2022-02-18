@@ -25,4 +25,4 @@ jobs:
             -   name: "Install dependencies"
                 run: "composer update --no-interaction --no-progress"
             -   name: "PHPStan"
-                run: "vendor/bin/phpstan analyse --memory-limit=-1 --no-progress"
+                run: "vendor/bin/phpstan analyse --memory-limit=-1 --no-progress --level=6 src tests"
