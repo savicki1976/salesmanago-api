@@ -20,8 +20,11 @@ final class EmailService extends AbstractService
     /**
      * @param  array<string, mixed> $data
      */
-    public function sendConfirmation(array $data): object
+    public function sendConfirmation(string $owner, string $email, array $data): object
     {
+        $data['owner'] = $owner;
+        $data['email'] = $email;
+
         return $this->client->doPost('email/sendConfirmation', $data);
     }
 }
