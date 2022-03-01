@@ -5,7 +5,7 @@ namespace Pixers\SalesManagoAPI\Service;
 /**
  * @author Sylwester Łuczak <sylwester.luczak@pixers.pl>
  */
-class EmailService extends AbstractService
+final class EmailService extends AbstractService
 {
     /**
      * Sending SalesManago e-mail.
@@ -15,5 +15,13 @@ class EmailService extends AbstractService
     public function create(array $data): object
     {
         return $this->client->doPost('email/send', $data);
+    }
+
+    /**
+     * @param  array<string, mixed> $data
+     */
+    public function sendConfirmation(array $data): object
+    {
+        return $this->client->doPost('email/sendConfirmation', $data);
     }
 }
