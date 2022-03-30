@@ -2,6 +2,7 @@
 
 namespace Pixers\SalesManagoAPI;
 
+use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Utils;
 use GuzzleHttp\Client as GuzzleClient;
 use Pixers\SalesManagoAPI\Exception\InvalidRequestException;
@@ -49,36 +50,42 @@ class Client
      * Send POST request to SalesManago API.
      *
      * @param  array<string, mixed>  $data   Request data
+     * @param  array<string, mixed>  $options   Request headers
      */
-    public function doPost(string $method, array $data): object
+    public function doPost(string $method, array $data, array $options = []): object
     {
-        return $this->doRequest(self::METHOD_POST, $method, $data);
+        return $this->doRequest(self::METHOD_POST, $method, $data, $options);
     }
 
     /**
      * Send GET request to SalesManago API.
      *
      * @param  array<string, mixed>  $data   Request data
+     * @param  array<string, mixed>  $options   Request options
      */
-    public function doGet(string $method, array $data): object
+    public function doGet(string $method, array $data, array $options = []): object
     {
-        return $this->doRequest(self::METHOD_GET, $method, $data);
+        return $this->doRequest(self::METHOD_GET, $method, $data, $options);
     }
 
     /**
      * Send request to SalesManago API.
      *
      * @param  array<string, mixed>  $data      Request data
+     * @param  array<string, mixed>  $options   Request options
      */
-    protected function doRequest(string $method, string $apiMethod, array $data = []): object
+    protected function doRequest(string $method, string $apiMethod, array $data = [], array $options = []): object
     {
         $url = $this->config['endpoint'] . $apiMethod;
         $data = $this->mergeData($this->createAuthData(), $data);
 
-        $response = $this->guzzleClient->request($method, $url, [
-            'json' => $data,
-            'http_errors' => false,
-        ]);
+        $response = $this->guzzleClient->request($method, $url, array_merge(
+            [
+                RequestOptions::JSON => $data,
+                RequestOptions::HTTP_ERRORS => false,
+            ],
+            $options,
+        ));
         $responseContent = Utils::jsonDecode((string) $response->getBody());
 
         if (!is_object($responseContent) || !property_exists($responseContent, 'success') || !$responseContent->success) {
