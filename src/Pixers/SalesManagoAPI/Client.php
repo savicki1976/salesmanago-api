@@ -2,6 +2,7 @@
 
 namespace Pixers\SalesManagoAPI;
 
+use GuzzleHttp\Exception\InvalidArgumentException as GuzzleInvalidArgumentException;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Utils;
 use GuzzleHttp\Client as GuzzleClient;
@@ -86,7 +87,11 @@ class Client
             ],
             $options,
         ));
-        $responseContent = Utils::jsonDecode((string) $response->getBody());
+        try {
+            $responseContent = Utils::jsonDecode((string)$response->getBody());
+        } catch (GuzzleInvalidArgumentException $invalidArgumentException) {
+            throw new InvalidRequestException($method, $url, $data, $response, $invalidArgumentException);
+        }
 
         if (!is_object($responseContent) || !property_exists($responseContent, 'success') || !$responseContent->success) {
             throw new InvalidRequestException($method, $url, $data, $response);

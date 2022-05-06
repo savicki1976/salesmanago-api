@@ -2,8 +2,9 @@
 
 namespace Pixers\SalesManagoAPI\Exception;
 
-use GuzzleHttp\Psr7\Response as Response;
+use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 /**
  * @author Sylwester Łuczak <sylwester.luczak@pixers.pl>
@@ -21,14 +22,21 @@ class InvalidRequestException extends SalesManagoAPIException
     /**
      * @param array<mixed> $requestData
      */
-    public function __construct(string $requestMethod, string $requestUrl, array $requestData, ResponseInterface $response)
+    public function __construct(string $requestMethod, string $requestUrl, array $requestData, ResponseInterface $response, ?Throwable $previous = null)
     {
         $this->requestMethod = $requestMethod;
         $this->requestUrl = $requestUrl;
         $this->requestData = $requestData;
         $this->response = $response;
 
-        parent::__construct('Error occured when sending request.');
+        $message = vsprintf('Error occured when sending request. Method: %, url: %s, request data: %s. Response: %', [
+            $requestMethod,
+            $requestUrl,
+            json_encode($requestData),
+            Response\Serializer::toString($response),
+        ]);
+
+        parent::__construct($message, 0, $previous);
     }
 
     public function getRequestMethod(): string
