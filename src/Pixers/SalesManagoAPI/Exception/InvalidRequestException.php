@@ -29,7 +29,7 @@ class InvalidRequestException extends SalesManagoAPIException
         $this->requestData = $requestData;
         $this->response = $response;
 
-        $message = vsprintf('Error occured when sending request. Method: %, url: %s, request data: %s. Response: %', [
+        $message = vsprintf('Error occurred when sending request. Method: %s, url: %s, data: %s. Response: %s', [
             $requestMethod,
             $requestUrl,
             json_encode($requestData),
