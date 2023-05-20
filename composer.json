@@ -15,7 +15,7 @@
     "require": {
         "php": "^8.0 || ^8.1",
         "guzzlehttp/guzzle": "^7.4.1",
-        "laminas/laminas-diactoros": "^2.10"
+        "laminas/laminas-diactoros": "^2.10|^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.13",
